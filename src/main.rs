@@ -97,8 +97,8 @@ fn mining(_sdone: chan::Sender<()>, json_data: serde_json::Value) {
             send_slack(["process start: ", &*address].join("").as_str());
         }
         let mut newest = "".to_string(); //保存用にloopから出した
-        let mut data = String::new(); //なぜかloopの中に入れると動かなくなる。TODO:原因調査
         loop {
+            let mut data = String::new();
             let file_name = "manukazeny.log";
             let mut f = match OpenOptions::new().read(true).open(file_name) {
                 Ok(f) => f,
@@ -106,8 +106,8 @@ fn mining(_sdone: chan::Sender<()>, json_data: serde_json::Value) {
             };
             f.read_to_string(&mut data).expect(["Can not read file: ", file_name].join("").as_str());
             let data_vec: Vec<&str> = data.split('\n').collect();
-            if data_vec.len() == 1 { continue } //lenが異常に大きくなってしまう。TODO:原因調査
-            let now = data_vec[data_vec.len()-2].to_string(); //なぜか"-2"しないと正常に動作しない。TODO:原因調査
+            if data_vec.len() <= 1 { continue }
+            let now = data_vec[data_vec.len()-2].to_string(); //data_vecの最後に""が入ってしまうため-1ではなく-2
             if newest != now {
                 {
                     let mut loop_counter = LOOP_COUNTER.write().unwrap();
