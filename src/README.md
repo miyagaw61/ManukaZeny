@@ -8,10 +8,22 @@ cargo install --git https://github.com/miyagaw61/ManukaZeny
 
 # Usage
 
-manukazeny [json-file]
+### Export Slack Config
 
-# json example
+```
+export RUSGIT_SLACK_URL=[slack-url]
+export RUSGIT_SLACK_USERNAME=[slack-username]
+```
+
+### Prepare Json File
+
+
+example:
 
 ```
 { "address": ["ABC", "IJK", "XYZ"] }
 ```
+
+### Execute
+
+manukazeny [json-file]
