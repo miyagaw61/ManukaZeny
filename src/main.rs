@@ -10,13 +10,11 @@ extern crate lazy_static;
 
 use std::fs::OpenOptions;
 use std::io::Read;
-use clap::{App, Arg, SubCommand};
+use clap::{App, Arg};
 use std::process::Command;
 use colored::*;
-use regex::Regex;
-use std::collections::BTreeMap;
-use serde_json::{Value, Error};
-use std::{thread, time};
+use serde_json::Value;
+use std::thread;
 use chan_signal::Signal;
 use std::sync::RwLock;
 
@@ -148,7 +146,7 @@ fn mining_wrap(data: serde_json::Value) { //並列化,シグナル処理
     let (sdone, rdone) = chan::sync(0);
     thread::spawn(move || mining(sdone, data));
     chan_select! {
-        signal.recv() -> signal => {
+        signal.recv() => {
             let address = ADDRESS.read().unwrap();
             let sum = SUM.read().unwrap();
             let loop_counter = LOOP_COUNTER.read().unwrap();
