@@ -12,7 +12,7 @@ cargo install --git https://github.com/miyagaw61/ManukaZeny
 
 ```
 export RUSGIT_SLACK_URL=[slack-url]
-export RUSGIT_SLACK_USERNAME=[slack-username]
+export RUSGIT_SLACK_CHANNEL=[slack-channel]
 ```
 
 ### Prepare Json File

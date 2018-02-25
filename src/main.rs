@@ -163,7 +163,7 @@ fn mining_wrap(data: serde_json::Value) { //並列化,シグナル処理
 }
 
 fn send_slack(message: &str) {
-    let before = [r#"curl -s -X POST --data-urlencode "payload={\"channel\": \""#, std::env::var("RUSGIT_SLACK_USERNAME").expect("[!]Please export RUSGIT_SLACK_USERNAME.").as_str(), r#"\", \"username\": \"Manuka Zeny\", \"text\": \""#].join("");
+    let before = [r#"curl -s -X POST --data-urlencode "payload={\"channel\": \""#, std::env::var("RUSGIT_SLACK_CHANNEL").expect("[!]Please export RUSGIT_SLACK_CHANNEL.").as_str(), r#"\", \"username\": \"Manuka Zeny\", \"text\": \""#].join("");
     let before = before.as_str();
     let after = [r#"\", \"icon_emoji\": \":ghost:\"}" "#, std::env::var("RUSGIT_SLACK_URL").expect("[!]Please export RUSGIT_SLACK_URL.").as_str(), r#" > /dev/null"#].join("");
     let after = after.as_str();
