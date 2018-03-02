@@ -8,6 +8,14 @@ cargo install --git https://github.com/miyagaw61/ManukaZeny
 
 # Usage
 
+### Prepare Miner
+
+https://github.com/macchky/cpuminer
+
+```
+export PATH=$PATH:/path/to/cpuminer
+```
+
 ### Export Slack Config
 
 ```
