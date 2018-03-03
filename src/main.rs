@@ -90,7 +90,7 @@ fn mining(_sdone: chan::Sender<()>, json_data: serde_json::Value) {
             *address = json_data["addresses"][addresses_counter].to_string();
             addresses_counter += 1;
             process([
-                    "minerd -a yescrypt -o stratum+tcp://bitzeny.bluepool.info:3330 -r 1 -u ",
+                    "minerd -a yescrypt -o stratum+tcp://bitzeny.bluepool.info:3330 -r 3 -u ",
                     &*address.as_str(),
                     " 1> /dev/null 2> manukazeny.log &"
             ].join("").as_str());
