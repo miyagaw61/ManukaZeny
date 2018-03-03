@@ -31,7 +31,7 @@ export RUSGIT_SLACK_CHANNEL=[slack-channel]
 example:
 
 ```
-{ "address": ["ABC", "IJK", "XYZ"] }
+{ "addresses": ["ABC", "IJK", "XYZ"] }
 ```
 
 ### Execute
