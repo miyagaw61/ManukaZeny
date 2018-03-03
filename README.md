@@ -2,6 +2,8 @@
 
 bitzeny miner (cpuminer wrapper)
 
+Details(Qiita): https://qiita.com/miyagaw61/items/f1a0aa265d3e41661914#%E8%B2%A2%E7%8C%AE
+
 # Install
 
 ```
