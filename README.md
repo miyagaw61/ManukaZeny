@@ -4,7 +4,9 @@ bitzeny miner (cpuminer wrapper)
 
 # Install
 
+```
 cargo install --git https://github.com/miyagaw61/ManukaZeny
+```
 
 # Usage
 
