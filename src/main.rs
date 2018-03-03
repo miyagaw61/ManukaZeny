@@ -183,7 +183,7 @@ fn main() {
         .arg(Arg::with_name("json_file")
              .help(r#"config json file
   (Example)
-  { "address": ["ABC", "IJK", "XYZ"] }"#)
+  { "addresses": ["ABC", "IJK", "XYZ"] }"#)
              .takes_value(true)
              .required(true)
              )
