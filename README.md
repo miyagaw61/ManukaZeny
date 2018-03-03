@@ -1,6 +1,6 @@
 # ManukaZeny
 
-bitzeny miner (cpuminer wrapper)
+A bitzeny miner (cpuminer wrapper) written in Rust
 
 # Details(Qiita)
 
