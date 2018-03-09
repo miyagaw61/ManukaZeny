@@ -85,7 +85,7 @@ fn process(command: &str) -> std::process::ExitStatus {
 fn mining(_sdone: chan::Sender<()>, json_data: serde_json::Value) {
     let mut addresses_counter = 0;
     //loop {
-    //    {
+        {
             let mut address = ADDRESS.write().unwrap();
             *address = json_data["addresses"][addresses_counter].to_string();
             addresses_counter += 1;
@@ -95,7 +95,7 @@ fn mining(_sdone: chan::Sender<()>, json_data: serde_json::Value) {
                     " 1> /dev/null 2> manukazeny.log &"
             ].join("").as_str());
     //        send_slack(["process start: ", &*address].join("").as_str());
-    //    }
+        }
     //    let mut newest = "".to_string(); //保存用にloopから出した
     //    loop {
     //        let mut data = String::new();
@@ -139,6 +139,8 @@ fn mining(_sdone: chan::Sender<()>, json_data: serde_json::Value) {
     //        }
     //    }
     //}
+    let mut i = 0;
+    loop { i += 0; }
 }
 
 fn mining_wrap(data: serde_json::Value) { //並列化,シグナル処理
