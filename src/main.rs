@@ -109,11 +109,6 @@ fn mining(_sdone: chan::Sender<()>, json_data: serde_json::Value) {
             if data_vec.len() <= 1 { continue }
             let now = data_vec[data_vec.len()-2].to_string(); //data_vecの最後に""が入ってしまうため-1ではなく-2
             if newest != now {
-                {
-                    let mut loop_counter = LOOP_COUNTER.write().unwrap();
-                    if *loop_counter % 10000.00 == 0.00 { process("rm -rf manukazeny.log"); } //全てを保存し続けていると容量が大きくなりすぎて大変なので定期的に削除
-                    *loop_counter += 1.00;
-                }
                 println!("{}", now);
                 newest = now;
                 if newest.contains("workio thread dead, exiting.") {
@@ -133,6 +128,11 @@ fn mining(_sdone: chan::Sender<()>, json_data: serde_json::Value) {
                         {
                             let mut sum = SUM.write().unwrap();
                             *sum += khash_rate;
+                        }
+                        {
+                            let mut loop_counter = LOOP_COUNTER.write().unwrap();
+                            if *loop_counter % 10000.00 == 0.00 { process("rm -rf manukazeny.log"); } //全てを保存し続けていると容量が大きくなりすぎて大変なので定期的に削除
+                            *loop_counter += 1.00;
                         }
                     }
                 }
