@@ -10,13 +10,13 @@ extern crate lazy_static;
 
 use std::fs::OpenOptions;
 use std::io::Read;
-use clap::{App, Arg};
 use std::process::Command;
 use colored::*;
 use serde_json::Value;
 use std::thread;
 use chan_signal::Signal;
 use std::sync::RwLock;
+use clap::{App, Arg, SubCommand};
 
 struct SystemResult {
     stdout: String,
@@ -175,21 +175,9 @@ lazy_static! {
     static ref LOOP_COUNTER: RwLock<f64> = RwLock::new(1.00);
 }
 
-fn main() {
-    let matches = App::new("Manuka Zeny")
-        .version("0.0.1")
-        .author("miyagaw61 <miyagaw61@gmail.com>")
-        .about("Cpuminer Wrapper in Rust")
-        .arg(Arg::with_name("json_file")
-             .help(r#"config json file
-  (Example)
-  { "address": ["ABC", "IJK", "XYZ"] }"#)
-             .takes_value(true)
-             .required(true)
-             )
-        .get_matches();
+fn start(matches: &clap::ArgMatches) {
     let mut data = String::new();
-    let file_name = matches.value_of("json_file").unwrap();
+    let file_name = matches.subcommand_matches("start").unwrap().value_of("json_file").unwrap();
     let mut f = match OpenOptions::new().read(true).open(file_name) {
         Ok(f) => f,
         Err(_) => {
@@ -201,4 +189,35 @@ fn main() {
     f.read_to_string(&mut data).expect(["Can not read file: ", file_name].join("").as_str());
     let data: Value = serde_json::from_str(&data[..]).expect("Can not deserialize");
     mining_wrap(data);
+}
+
+fn help() {
+    println!("\
+USAGE:
+    manukazeny [SUBCOMMAND]
+manukazeny -h for help\
+");
+}
+
+fn main() {
+    let matches = App::new("Manuka Zeny")
+        .version("0.0.1")
+        .author("miyagaw61 <miyagaw61@gmail.com>")
+        .about("Cpuminer Wrapper in Rust")
+        .subcommand(SubCommand::with_name("start")
+                    .about("start manukazeny")
+                    .arg(Arg::with_name("json_file")
+                         .help(r#"config json file
+              (Example)
+              { "address": ["ABC", "IJK", "XYZ"] }"#)
+                         .takes_value(true)
+                         .required(true)
+                         )
+                    )
+        .get_matches();
+    let sub_command = matches.subcommand_name().unwrap_or("");
+    match sub_command {
+        "start" => start(&matches),
+        _ => help()
+    }
 }
