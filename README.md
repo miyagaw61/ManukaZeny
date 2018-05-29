@@ -41,5 +41,11 @@ example:
 ### Execute
 
 ```
-manukazeny [json-file]
+manukazeny start [json-file]
+```
+
+### Stop Mining
+
+```
+manukazeny stop
 ```
